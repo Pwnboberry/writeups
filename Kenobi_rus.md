@@ -108,7 +108,7 @@ ProFTPD 1.3.5 включает модуль mod_copy, который реали�
 ![](https://github.com/Pwnboberry/writeups/blob/main/images/user.txt.png)
 
 <details>
-<summary>Вопрос: What is Kenobi's user flag?>
+<summary>Вопрос: What is Kenobi's user flag?</summary>
 
 d0b0f3f53b6caa532a83915e19224899
 
@@ -121,7 +121,7 @@ d0b0f3f53b6caa532a83915e19224899
 ![](https://github.com/Pwnboberry/writeups/blob/main/images/search_suid.png)
 
 <details>
-<summary>Вопрос: What file looks particularly out of the ordinary?>
+<summary>Вопрос: What file looks particularly out of the ordinary?</summary>
 
 /usr/bin/menu
 
@@ -133,7 +133,7 @@ d0b0f3f53b6caa532a83915e19224899
 ![](https://github.com/Pwnboberry/writeups/blob/main/images/bin.png)
 
 <details>
-<summary>Вопрос: Run the binary, how many options appear?>
+<summary>Вопрос: Run the binary, how many options appear?</summary>
 
 3
 
@@ -149,7 +149,7 @@ d0b0f3f53b6caa532a83915e19224899
 ![](https://github.com/Pwnboberry/writeups/blob/main/images/root_flag.png)
 
 <details>
-<summary>Вопрос: What is the root flag (/root/root.txt)?>
+<summary>Вопрос: What is the root flag (/root/root.txt)?</summary>
 
 177b3cd8562289f37382721c28381f02
 
