@@ -24,8 +24,11 @@ Nmap обнаружил 7 открытых портов на целевой ма
 </details>
 
 ## Задание 2: Перечисление (SMB)
-### Команда ```
-bash nmap -p 445 --script=smb-enum-shares.nse 10.114.156.150 ``` не сработала должным образом.
+### Команда 
+```
+bash nmap -p 445 --script=smb-enum-shares.nse 10.114.156.150 
+```
+не сработала должным образом.
 
 ![](https://github.com/Pwnboberry/writeups/blob/main/images/smb_comm.png)
 
