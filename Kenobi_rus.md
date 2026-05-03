@@ -71,8 +71,8 @@ Nmap обнаружил 7 открытых портов на целевой ма
 
 </details>
 
-Задание 3: Эксплуатация ProFTPD
-Определение версии ProFTPD 
+## Задание 3: Эксплуатация ProFTPD
+### Определение версии ProFTPD 
 
 ![](https://github.com/Pwnboberry/writeups/blob/main/images/proFTPD.png)
 
@@ -114,8 +114,8 @@ d0b0f3f53b6caa532a83915e19224899
 
 </details>
 
-Задание 4: Повышение привилегий через SUID
-Поиск SUID-файлов
+## Задание 4: Повышение привилегий через SUID
+### Поиск SUID-файлов
 ```bash find / -perm -u=s -type f 2>/dev/null```
 
 ![](https://github.com/Pwnboberry/writeups/blob/main/images/search_suid.png)
