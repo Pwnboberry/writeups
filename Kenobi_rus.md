@@ -1,102 +1,103 @@
+# Kenobi — TryHackMe
 
+**Author:** pwnboberry  
+**Date:** Май 2026  
 
-Kenobi — TryHackMe
-pwnboberry
-## Май 2026
-Задание 1: Развёртывание уязвимой машины
-Nmap сканирование
+---
+
+## Задание 1: Развёртывание уязвимой машины
+
+### Nmap сканирование
+
+```bash
 nmap -sC -sV 10.114.156.150
-## (images/nmap_scan.png)
+https://images/nmap_scan.png
 
 Nmap обнаружил 7 открытых портов на целевой машине.
-Вопрос: Scan the machine with nmap, how many ports are open?
-[!NOTE]- Ответ
-## 7
-Задание 2:Перечисление (SMB)
-Команда nmap -p 445 --script=smb-enum-shares.nse 10.114.156.150 не сработала
-должным образом
-## (images/smb_comm.png)
 
-Поэтому мы использовали более надёжную альтернативу: smbclient -L //10.114.156.150
-## -N
-## (images/smbclient_comm.png)
+[!NOTE]- Сколько портов открыто?
+7
 
-Вопрос: Using the nmap command above, how many shares have been found?
-[!NOTE]- Ответ
-## 3
+Задание 2: Перечисление (SMB)
+Команда nmap -p 445 --script=smb-enum-shares.nse 10.114.156.150 не сработала должным образом.
 
-Подключились к анонимной шаре и с помощью ls и нашли файл log.txt.
-## (images/anonshare.png)
+https://images/smb_comm.png
 
-Чтобы не усложнять жизнь сложными командами, скачали файл через get
-## (images/get.png)
+Поэтому мы использовали более надёжную альтернативу:
 
-После получения файла log.txt его содержимое было прочитано с помощью cat. Анализ
-выявил информацию об FTP-сервисе, включая порт, на котором он работает.
-## (images/port21.png)
+bash
+smbclient -L //10.114.156.150 -N
+https://images/smbclient_comm.png
 
-Вопрос: What port is FTP running on?
-[!NOTE]- Ответ
-## 21
+[!NOTE]- Сколько шаров найдено?
+3
 
-Для перечисления NFS-ресурсов использовали команду:
+Подключились к анонимной шаре, с помощью ls нашли файл log.txt.
+
+https://images/anonshare.png
+
+Чтобы не усложнять, скачали файл через get:
+
+https://images/get.png
+
+Прочитали log.txt через cat. Анализ выявил информацию об FTP-сервисе, включая порт.
+
+https://images/port21.png
+
+[!NOTE]- Какой порт у FTP?
+21
+
+NFS-ресурсы
+bash
 nmap -p 111 --script=nfs-ls,nfs-statfs,nfs-showmount 10.114.156.150
-## (images/nfs.png)
+https://images/nfs.png
 
-Вопрос: What mount can we see?
-[!NOTE]- Ответ
-## /var
+[!NOTE]- Какой mount видим?
+/var
 
-Задание 3: : Эксплуатация ProFTPD
+Задание 3: Эксплуатация ProFTPD
+Версия ProFTPD
+https://images/proFTPD.png
 
-Определение версии ProFTPD
-(images/proFTPD.png)
+[!NOTE]- Какая версия?
+1.3.5
 
-Вопрос: What is the version?
-[!NOTE]- Ответ
-## 1.3.5
+Поиск эксплойтов
+bash
+searchsploit proftpd 1.3.5
+https://images/searchsploit.png
 
-Поиск эксплойтов через searchsploit
-## (images/searchsploit.png)
-
-Вопрос: How many exploits are there for the ProFTPd running?
-[!NOTE]- Ответ
-## 4
+[!NOTE]- Сколько эксплойтов?
+4
 
 Анализ модуля mod_copy
-ProFTPD версии 1.3.5 включает модуль mod_copy, который реализует команды SITE
-CPFR (копировать из) и SITE CPTO (копировать в). Эти команды позволяют
-неаутентифицированному пользователю копировать файлы из любого места
-файловой системы в выбранное место назначения. Аутентификация не требуется.
-## (images/mod_copy.png)
+ProFTPD 1.3.5 включает модуль mod_copy, который реализует команды SITE CPFR (копировать из) и SITE CPTO (копировать в).
+Эти команды позволяют неаутентифицированному пользователю копировать файлы из любого места файловой системы.
+
+https://images/mod_copy.png
 
 Копирование SSH-ключа Kenobi
-## (images/sshcopy.png)
+https://images/sshcopy.png
 
-Вопрос: What is Kenobi's user flag?
-[!NOTE]- Ответ
+[!NOTE]- Флаг пользователя Kenobi
 d0b0f3f53b6caa532a83915e19224899
 
 Задание 4: Повышение привилегий через SUID
 Поиск SUID-файлов
+bash
 find / -perm -u=s -type f 2>/dev/null
-## (images/search_suid.png)
+https://images/search_suid.png
 
-Вопрос: What file looks particularly out of the ordinary?
-[!NOTE]- Ответ
-## /usr/bin/menu
-
+[!NOTE]- Какой файл выделяется?
+/usr/bin/menu
 
 Анализ бинарного файла
 Запустили бинарник:
-## (images/bin.png)
 
-Вопрос: Run the binary, how many options appear?
-[!NOTE]- Ответ
-## 3
+https://images/bin.png
+
+[!NOTE]- Сколько опций появляется?
+3
 
 Эксплуатация — манипуляция PATH
-(images/PATH.png)
-
-
-
+https://images/PATH.png
