@@ -33,7 +33,9 @@ bash nmap -p 445 --script=smb-enum-shares.nse 10.114.156.150
 ![](https://github.com/Pwnboberry/writeups/blob/main/images/smb_comm.png)
 
 Поэтому мы использовали более надёжную альтернативу:
-```bash smbclient -L //10.114.156.150 -N ```
+```
+bash smbclient -L //10.114.156.150 -N
+```
 
 ![](https://github.com/Pwnboberry/writeups/blob/main/images/smbclient_comm.png)
 
@@ -64,7 +66,9 @@ bash nmap -p 445 --script=smb-enum-shares.nse 10.114.156.150
 </details>
 
 Для перечисления NFS-ресурсов использовали команду: 
-```bash nmap -p 111 --script=nfs-ls,nfs-statfs,nfs-showmount 10.114.156.150 ```
+```
+bash nmap -p 111 --script=nfs-ls,nfs-statfs,nfs-showmount 10.114.156.150
+```
 
 ![](https://github.com/Pwnboberry/writeups/blob/main/images/nfs.png)
 
@@ -88,7 +92,9 @@ bash nmap -p 445 --script=smb-enum-shares.nse 10.114.156.150
 </details>
 
 Поиск эксплойтов через searchsploit
-```bash searchsploit proftpd 1.3.5```
+```
+bash searchsploit proftpd 1.3.5
+```
 
 ![](https://github.com/Pwnboberry/writeups/blob/main/images/searchsploit.png)
 
@@ -120,7 +126,9 @@ d0b0f3f53b6caa532a83915e19224899
 
 ## Задание 4: Повышение привилегий через SUID
 ### Поиск SUID-файлов
-```bash find / -perm -u=s -type f 2>/dev/null```
+```
+bash find / -perm -u=s -type f 2>/dev/null
+```
 
 ![](https://github.com/Pwnboberry/writeups/blob/main/images/search_suid.png)
 
