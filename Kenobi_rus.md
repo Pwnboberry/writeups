@@ -89,7 +89,7 @@ Nmap обнаружил 7 открытых портов на целевой ма
 ![](https://github.com/Pwnboberry/writeups/blob/main/images/searchsploit.png)
 
 <details>
-<summary>Вопрос: How many exploits are there for the ProFTPd running?>
+<summary>Вопрос: How many exploits are there for the ProFTPd running?</summary>
 
 4
 
