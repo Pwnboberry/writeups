@@ -11,6 +11,7 @@
 
 ```bash
 nmap -sC -sV 10.114.156.150
+```
 https://images/nmap_scan.png
 
 Nmap обнаружил 7 открытых портов на целевой машине.
