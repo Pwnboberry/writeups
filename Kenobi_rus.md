@@ -17,7 +17,7 @@ nmap -sC -sV 10.114.156.150
 Nmap обнаружил 7 открытых портов на целевой машине.
 
 <details>
-<summary>Вопрос: Сколько портов открыто?</summary>
+<summary>Вопрос: Scan the machine with nmap, how many ports are open?</summary>
 
 7
 
@@ -30,77 +30,139 @@ Nmap обнаружил 7 открытых портов на целевой ма
 
 Поэтому мы использовали более надёжную альтернативу:
 ```bash smbclient -L //10.114.156.150 -N ```
+
 ![](https://github.com/Pwnboberry/writeups/blob/main/images/smbclient_comm.png)
 
-[!NOTE]- Сколько шаров найдено?
+<details>
+<summary>Вопрос: Using the nmap command above, how many shares have been found?</summary>
+
 3
+
+</details>
 
 Подключились к анонимной шаре, с помощью ls нашли файл log.txt.
 
-https://images/anonshare.png
+![](https://github.com/Pwnboberry/writeups/blob/main/images/anonshare.png)
 
-Чтобы не усложнять, скачали файл через get:
+Чтобы не усложнять жизнь сложными командами, скачали файл через get
 
-https://images/get.png
+![](https://github.com/Pwnboberry/writeups/blob/main/images/get.png)
 
 Прочитали log.txt через cat. Анализ выявил информацию об FTP-сервисе, включая порт.
 
-https://images/port21.png
+![](https://github.com/Pwnboberry/writeups/blob/main/images/port21.png)
 
-[!NOTE]- Какой порт у FTP?
+<details>
+<summary>Вопрос: What port is FTP running on?</summary>
+
 21
 
-NFS-ресурсы
-bash
-nmap -p 111 --script=nfs-ls,nfs-statfs,nfs-showmount 10.114.156.150
-https://images/nfs.png
+</details>
 
-[!NOTE]- Какой mount видим?
+Для перечисления NFS-ресурсов использовали команду: 
+```bash nmap -p 111 --script=nfs-ls,nfs-statfs,nfs-showmount 10.114.156.150 ```
+
+![](https://github.com/Pwnboberry/writeups/blob/main/images/nfs.png)
+
+<details>
+<summary>Вопрос: What mount can we see?</summary>
+
 /var
 
-Задание 3: Эксплуатация ProFTPD
-Версия ProFTPD
-https://images/proFTPD.png
+</details>
 
-[!NOTE]- Какая версия?
+Задание 3: Эксплуатация ProFTPD
+Определение версии ProFTPD 
+
+![](https://github.com/Pwnboberry/writeups/blob/main/images/proFTPD.png)
+
+<details>
+<summary>Вопрос: What is the version?</summary>
+
 1.3.5
 
-Поиск эксплойтов
-bash
-searchsploit proftpd 1.3.5
-https://images/searchsploit.png
+</details>
 
-[!NOTE]- Сколько эксплойтов?
+Поиск эксплойтов через searchsploit
+```bash searchsploit proftpd 1.3.5```
+
+![](https://github.com/Pwnboberry/writeups/blob/main/images/searchsploit.png)
+
+<details>
+<summary>Вопрос: How many exploits are there for the ProFTPd running?>
+
 4
+
+</details>
 
 Анализ модуля mod_copy
 ProFTPD 1.3.5 включает модуль mod_copy, который реализует команды SITE CPFR (копировать из) и SITE CPTO (копировать в).
 Эти команды позволяют неаутентифицированному пользователю копировать файлы из любого места файловой системы.
 
-https://images/mod_copy.png
+![](https://github.com/Pwnboberry/writeups/blob/main/images/mod_copy.png)
 
 Копирование SSH-ключа Kenobi
-https://images/sshcopy.png
 
-[!NOTE]- Флаг пользователя Kenobi
+![](https://github.com/Pwnboberry/writeups/blob/main/images/sshcopy.png)
+
+![](https://github.com/Pwnboberry/writeups/blob/main/images/user.txt.png)
+
+<details>
+<summary>Вопрос: What is Kenobi's user flag?>
+
 d0b0f3f53b6caa532a83915e19224899
+
+</details>
 
 Задание 4: Повышение привилегий через SUID
 Поиск SUID-файлов
-bash
-find / -perm -u=s -type f 2>/dev/null
-https://images/search_suid.png
+```bash find / -perm -u=s -type f 2>/dev/null```
 
-[!NOTE]- Какой файл выделяется?
+![](https://github.com/Pwnboberry/writeups/blob/main/images/search_suid.png)
+
+<details>
+<summary>Вопрос: What file looks particularly out of the ordinary?>
+
 /usr/bin/menu
+
+</details>
 
 Анализ бинарного файла
 Запустили бинарник:
 
-https://images/bin.png
+![](https://github.com/Pwnboberry/writeups/blob/main/images/bin.png)
 
-[!NOTE]- Сколько опций появляется?
+<details>
+<summary>Вопрос: Run the binary, how many options appear?>
+
 3
 
+</details>
+
+
 Эксплуатация — манипуляция PATH
-https://images/PATH.png
+
+![](https://github.com/Pwnboberry/writeups/blob/main/images/PATH.png)
+
+Мы получили доступ от root и можем искать root-флаги 
+
+![](https://github.com/Pwnboberry/writeups/blob/main/images/root_flag.png)
+
+<details>
+<summary>Вопрос: What is the root flag (/root/root.txt)?>
+
+177b3cd8562289f37382721c28381f02
+
+</details>
+
+---
+## Итог
+
+Машина **Kenobi** полностью скомпрометирована.  
+Получены флаги пользователя и root.  
+
+Основные уязвимости:
+- Анонимный доступ к SMB и NFS
+- Устаревшая версия ProFTPD (1.3.5) с модулем `mod_copy`
+- SUID-бинар `/usr/bin/menu`
+- Небезопасная переменная `PATH`
