@@ -17,22 +17,20 @@ nmap -sC -sV 10.114.156.150
 Nmap обнаружил 7 открытых портов на целевой машине.
 
 <details>
-<summary>Сколько портов открыто?</summary>
+<summary>Вопрос: Сколько портов открыто?</summary>
 
 7
 
 </details>
 
 Задание 2: Перечисление (SMB)
-Команда nmap -p 445 --script=smb-enum-shares.nse 10.114.156.150 не сработала должным образом.
+Команда ```bash nmap -p 445 --script=smb-enum-shares.nse 10.114.156.150 ``` не сработала должным образом.
 
-https://images/smb_comm.png
+![](https://github.com/Pwnboberry/writeups/blob/main/images/smb_comm.png)
 
 Поэтому мы использовали более надёжную альтернативу:
-
-bash
-smbclient -L //10.114.156.150 -N
-https://images/smbclient_comm.png
+```bash smbclient -L //10.114.156.150 -N ```
+![](https://github.com/Pwnboberry/writeups/blob/main/images/smbclient_comm.png)
 
 [!NOTE]- Сколько шаров найдено?
 3
