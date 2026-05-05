@@ -15,7 +15,7 @@
 
 ![](https://github.com/Pwnboberry/writeups/blob/main/PickeRick/images/soursecode.png)
 
-Здесь был обнаружен Username: R1ckRul3s
+## Здесь был обнаружен Username: R1ckRul3s
 
 Чтобы провести более глубокий анализ и поиск скрытых директорий на сервере, мы используем такую команду:
 ```bash
@@ -53,7 +53,7 @@ http://10.112.161.78/login.php
 
 ![](https://github.com/Pwnboberry/writeups/blob/main/PickeRick/images/1st.png)
 
-1 ингредиент найден!
+## 1 ингредиент найден!
 <details>
 <summary>Вопрос: What is the first ingredient that Rick needs?</summary>
 
@@ -84,7 +84,7 @@ ls -la /
 
 ![](https://github.com/Pwnboberry/writeups/blob/main/PickeRick/images/2st.png)
 
-2 ингредиент найден!
+## 2 ингредиент найден!
 <details>
 <summary>Вопрос: What is the second ingredient in Rick’s potion?</summary>
 
@@ -92,17 +92,17 @@ ls -la /
 
 </details>
 
-Ищем далее 3 ингредиент
+## Ищем далее 3 ингредиент
 Ранее в выводе 'ls -la /' мы видели директорию /root
 Так как у нас есть права рут, мы можем выполнить просмотр фалов в ней
 
 ![](https://github.com/Pwnboberry/writeups/blob/main/PickeRick/images/root_ls.png)
 
-Просмотрим файл с 3 ингредиентом
+Просмотрим файл с данными
 
 ![](https://github.com/Pwnboberry/writeups/blob/main/PickeRick/images/3rt.png)
 
-3 ингредиент найден!
+## 3 ингредиент найден!
 
 <details>
 <summary>Вопрос: What is the last and final ingredient?</summary>
