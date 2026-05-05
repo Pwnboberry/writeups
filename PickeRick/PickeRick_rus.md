@@ -27,7 +27,7 @@ gobuster dir -u http://IP -w /usr/share/wordlists/dirb/common.txt
 
 ![](https://github.com/Pwnboberry/writeups/blob/main/PickeRick/images/gobresult.png)
 
-Мы обнаружили скрытую папку под название robots.txt. Проверим что там скрывается, перейдя по адресу:
+Мы обнаружили скрытую папку под названием robots.txt. Проверим что там скрывается, перейдя по адресу:
 ```bash
 http://10.112.161.78/robots.txt
 ```
@@ -44,10 +44,12 @@ http://10.112.161.78/login.php
 ![](https://github.com/Pwnboberry/writeups/blob/main/PickeRick/images/login.png)
 
 Успешно входим в систему по вышенайденному паролю и логину, а также проверяем папки командой ls
+
 ![](https://github.com/Pwnboberry/writeups/blob/main/PickeRick/images/command%20panel.png)
 
 Сразу замечаем интересный файл под названием Sup3rS3cretPickl3Ingred.txt
 Так как 'cat' здесь не работает, используем альтернативу 'less' для просмотра файла
+
 ![](https://github.com/Pwnboberry/writeups/blob/main/PickeRick/images/1st.png)
 
 1 ингредиент найден!
