@@ -49,7 +49,7 @@ We successfully logged in using the discovered password and username, then check
 
 We immediately noticed an interesting file named Sup3rS3cretPickl3Ingred.txt.
 
-Since 'cat' is blocked here, we used less as an alternative to view the file.
+Since 'cat' is blocked here, we used 'less' as an alternative to view the file.
 
 ![](https://github.com/Pwnboberry/writeups/blob/main/PickeRick/images/1st.png)
 
