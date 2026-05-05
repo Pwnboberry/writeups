@@ -54,9 +54,13 @@ http://10.112.161.78/login.php
 ![](https://github.com/Pwnboberry/writeups/blob/main/PickeRick/images/1st.png)
 
 1 ингредиент найден!
-<1>
+<details>
+<summary>Вопрос: What is the first ingredient that Rick needs?</summary>
+
 mr. meeseek hair
-</1>
+
+</details>
+
 
 Просмотр остальных файлов сказал нам искать остальные ингредиенты в других частях системы.
 
@@ -82,7 +86,10 @@ ls -la /
 
 2 ингредиент найден!
 <details>
+<summary>Вопрос: What is the second ingredient in Rick’s potion?</summary>
+
 1 jerry tear
+
 </details>
 
 Ищем далее 3 ингредиент
@@ -96,8 +103,12 @@ ls -la /
 ![](https://github.com/Pwnboberry/writeups/blob/main/PickeRick/images/3rt.png)
 
 3 ингредиент найден!
+
 <details>
+<summary>Вопрос: What is the last and final ingredient?</summary>
+
 fleeb juice
+
 </details>
 
 ## Заключение
