@@ -10,12 +10,14 @@
 Запускаем машину и заходим на сайт по айпи
 
 ![](https://github.com/Pwnboberry/writeups/blob/main/PickeRick/images/site.PNG)
+
 Ничего интересного на главной странице мы не обнаружили, поэтому посмотрим Page Source
 
 ![](https://github.com/Pwnboberry/writeups/blob/main/PickeRick/images/soursecode.png)
+
 Здесь был обнаружен Username: R1ckRul3s
 
-Чтобы провести более глубокий анализ и поиск скрытых директорий на сервере, мы используем такую комамнду:
+Чтобы провести более глубокий анализ и поиск скрытых директорий на сервере, мы используем такую команду:
 ```bash
 gobuster dir -u http://IP -w /usr/share/wordlists/dirb/common.txt
 ```
