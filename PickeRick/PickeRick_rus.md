@@ -84,7 +84,7 @@ ls -la /
 
 ![](https://github.com/Pwnboberry/writeups/blob/main/PickeRick/images/2st.png)
 
-## 2 ингредиент найден!
+### 2 ингредиент найден!
 <details>
 <summary>Вопрос: What is the second ingredient in Rick’s potion?</summary>
 
@@ -102,7 +102,7 @@ ls -la /
 
 ![](https://github.com/Pwnboberry/writeups/blob/main/PickeRick/images/3rt.png)
 
-## 3 ингредиент найден!
+### 3 ингредиент найден!
 
 <details>
 <summary>Вопрос: What is the last and final ingredient?</summary>
