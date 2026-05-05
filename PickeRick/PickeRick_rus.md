@@ -47,13 +47,14 @@ http://10.112.161.78/login.php
 
 ![](https://github.com/Pwnboberry/writeups/blob/main/PickeRick/images/command%20panel.png)
 
-Сразу замечаем интересный файл под названием Sup3rS3cretPickl3Ingred.txt
+Сразу замечаем интересный файл под названием Sup3rS3cretPickl3Ingred.txt.
+
 Так как 'cat' здесь не работает, используем альтернативу 'less' для просмотра файла
 
 ![](https://github.com/Pwnboberry/writeups/blob/main/PickeRick/images/1st.png)
 
 1 ингредиент найден!
-<details>
+<1 ингредиент>
 mr. meeseek hair
 </details>
 
