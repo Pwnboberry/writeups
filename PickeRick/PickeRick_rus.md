@@ -54,9 +54,9 @@ http://10.112.161.78/login.php
 ![](https://github.com/Pwnboberry/writeups/blob/main/PickeRick/images/1st.png)
 
 1 ингредиент найден!
-<1 ингредиент>
+<1>
 mr. meeseek hair
-</details>
+</1>
 
 Просмотр остальных файлов сказал нам искать остальные ингредиенты в других частях системы.
 
