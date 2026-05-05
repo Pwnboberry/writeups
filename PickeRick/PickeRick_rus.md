@@ -24,6 +24,7 @@ gobuster dir -u http://IP -w /usr/share/wordlists/dirb/common.txt
 ![](https://github.com/Pwnboberry/writeups/blob/main/PickeRick/images/gobuster.png)
 
 Результат вывода команды:
+
 ![](https://github.com/Pwnboberry/writeups/blob/main/PickeRick/images/gobresult.png)
 
 Мы обнаружили скрытую папку под название robots.txt. Проверим что там скрывается, перейдя по адресу:
