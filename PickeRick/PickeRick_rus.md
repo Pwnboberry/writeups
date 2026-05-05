@@ -15,7 +15,7 @@
 
 ![](https://github.com/Pwnboberry/writeups/blob/main/PickeRick/images/soursecode.png)
 
-## Здесь был обнаружен Username: R1ckRul3s
+Здесь был обнаружен Username: R1ckRul3s
 
 Чтобы провести более глубокий анализ и поиск скрытых директорий на сервере, мы используем такую команду:
 ```bash
@@ -53,7 +53,7 @@ http://10.112.161.78/login.php
 
 ![](https://github.com/Pwnboberry/writeups/blob/main/PickeRick/images/1st.png)
 
-## 1 ингредиент найден!
+### 1 ингредиент найден!
 <details>
 <summary>Вопрос: What is the first ingredient that Rick needs?</summary>
 
