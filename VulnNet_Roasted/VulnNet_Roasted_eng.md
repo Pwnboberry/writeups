@@ -61,6 +61,7 @@ Result:
 
 ### Finding a password dump via SMB
 Using the credentials of the user t-skid, we connected to the SMB share and discovered a password dump file, which was downloaded for further analysis.
+
 ![](https://github.com/Pwnboberry/writeups/blob/main/VulnNet_Roasted/images/resetpasswords.png)
 
 The SMB share contained a file with a login and password that were used to dump hashes for all users.
