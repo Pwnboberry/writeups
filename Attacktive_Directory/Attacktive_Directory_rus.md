@@ -158,16 +158,7 @@ backup@spookysec.local:backup2517860
 
 ### Задача 7: Повышение привилегий домена
 
-<details>
-<summary>Какой метод позволил нам сделать дамп NTDS.DIT?</summary>
-
-DRSUAPI
-
-</details>
-
-Используя учётную запись backup, удалось выполнить дамп NTDS.DIT через DRSUAPI 
-
-с помощью инструмента secretsdump из пакета Impacket.
+Используя учётную запись backup, удалось выполнить дамп NTDS.DIT через DRSUAPI с помощью инструмента secretsdump из пакета Impacket.
 Команда: 
 
 ```bash
