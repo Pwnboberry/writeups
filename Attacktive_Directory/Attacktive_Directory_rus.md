@@ -32,7 +32,7 @@ enum4linux
 
 </details>
 
-Испольузем nmap для того, чтобы быстрее и легче узнать имя домена
+Используем nmap для того, чтобы быстрее и легче узнать имя домена
 
 ![](https://github.com/Pwnboberry/writeups/blob/main/Attacktive_Directory/images/nmap.png)
 
@@ -49,8 +49,8 @@ enum4linux
 
 Также удалось определить:
 
-доменное имя: spookysec.local;
-NetBIOS-имя: THM-AD.
+- доменное имя: 'spookysec.local'
+- NetBIOS-имя: 'THM-AD'
 
 
 <details>
@@ -64,7 +64,7 @@ NetBIOS-имя: THM-AD.
 
 Для этого использовался инструмент Kerbrute, позволяющий определять существующие учётные записи без необходимости аутентификации.
 ```bash
-kerbrute usernum –d имя домена –dc айпи userlist.txt (взяли с сайта и перенесли на кали)
+kerbrute usernum –d имя домена –dc айпи userlist.txt 
 ```
 
 ![](https://github.com/Pwnboberry/writeups/blob/main/Attacktive_Directory/images/kerbrute.png)
