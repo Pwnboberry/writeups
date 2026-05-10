@@ -38,21 +38,19 @@ enum4linux
 
 В ходе сканирования были обнаружены сервисы Active Directory, включая:
 
-Kerberos;
-LDAP;
-SMB;
-DNS.
+- Kerberos
+- LDAP
+- SMB
+- DNS
 
 Также узнаем сетевое доменное имя
 
 ![](https://github.com/Pwnboberry/writeups/blob/main/Attacktive_Directory/images/thm-adm.png)
 
-<details>
-<summary>Вопрос: Какое сетевое имя NetBIOS-домена у машины?</summary>
+Также удалось определить:
 
-THM-AD
-
-</details>
+доменное имя: spookysec.local;
+NetBIOS-имя: THM-AD.
 
 
 <details>
@@ -64,48 +62,28 @@ THM-AD
 
 ### Задача 4: Перечисление пользователей с помощью Kerberos
 
-Используем команду для выяснения учетных записей пользователей:
+Для этого использовался инструмент Kerbrute, позволяющий определять существующие учётные записи без необходимости аутентификации.
 ```bash
 kerbrute usernum –d имя домена –dc айпи userlist.txt (взяли с сайта и перенесли на кали)
 ```
 
 ![](https://github.com/Pwnboberry/writeups/blob/main/Attacktive_Directory/images/kerbrute.png)
 
-Нашли несколько примечательных имен
+В результате enumeration были обнаружены несколько доменных пользователей, включая:
+
+- svc-admin
+- backup
 
 ![](https://github.com/Pwnboberry/writeups/blob/main/Attacktive_Directory/images/kerbrnames.png)
 
-<details>
-<summary>Вопрос: Какая команда в Kerbrute позволяет перечислять действительные имена пользователей?</summary>
-
-Userenum
-
-</details>
-
-<details>
-<summary>Вопрос: Какая примечательная учётная запись была обнаружена? (Она должна броситься в глаза)</summary>
-
-svc-admin
-
-</details>
-
-<details>
-<summary>Вопрос: Какая другая примечательная учётная запись была обнаружена?</summary>
-
-Backup
-
-</details>
-
 ### Задача 5: Эксплуатация с использованием Kerberos
 
-<details>
-<summary>У нас есть две учётные записи, у которых мы потенциально можем запросить билет. С какой учётной записи вы можете запросить билет без пароля?</summary>
+Аккаунт svc-admin оказался особенно интересным, поскольку для него была отключена Kerberos pre-authentication.
 
-svc-admin
+Так как для учётной записи svc-admin не требовалась предварительная Kerberos-аутентификация, появилась возможность выполнить атаку AS-REP Roasting и получить Kerberos-хэш пользователя без знания пароля.
 
-</details>
-
-Получаем хэш админа атакой  as rep и сохраняем в файл hash.txt командой:
+Для получения хэша использовался Impacket GetNPUsers.
+Также сохраняем файл hash.txt
 
 ```bash
 Python 3 GetNPUsers.py имя домена/имя пользователя –no-pass –dc-ip айпи 
@@ -127,7 +105,7 @@ Kerberos 5 AS-REP etype 23
 
 </details>
 
-Расшифровываем хэш админа командой:
+Полученный хэш был сохранён и передан в Hashcat:
 
 ```bash
 Hashcat –m 18200 –a 0 имя файла /usr/share/wordlists/rockyou.txt
@@ -139,42 +117,15 @@ Hashcat –m 18200 –a 0 имя файла /usr/share/wordlists/rockyou.txt
 
 ![](https://github.com/Pwnboberry/writeups/blob/main/Attacktive_Directory/images/5.png)
 
-<details>
-<summary>Теперь взломайте хэш с предоставленным модифицированным списком паролей. Каков пароль учётной записи пользователя?</summary>
-
-management2005
-
-</details>
+В результате удалось получить пароль пользователя svc-admin.
 
 ### Задача 6: Вернемся к основам перечисления
 
-<details>
-<summary>Какую утилиту мы можем использовать для отображения удалённых SMB-шар?</summary>
-
-Smbclient
-
-</details>
-
-<details>
-<summary>Какой параметр (опция) выводит список шар?</summary>
-
--L
-
-</details>
-
-Смотрим в какие директории мы можем зайти
-Команда:
+После получения доменных учётных данных было выполнено перечисление SMB-шар.
 ```bash
 Smbclient –L айпи –U домен/имя пользователя
 ```
 ![](https://github.com/Pwnboberry/writeups/blob/main/Attacktive_Directory/images/smb1.png)
-
-<details>
-<summary>Сколько удалённых шар отображает сервер?</summary>
-
-6
-
-</details>
 
 <details>
 <summary>Есть одна конкретная шара, к которой у нас есть доступ и которая содержит текстовый файл. Какая это шара?</summary>
@@ -187,18 +138,14 @@ Backup
 
 ![](https://github.com/Pwnboberry/writeups/blob/main/Attacktive_Directory/images/smb2.png)
 
-Вывод файла backup_credentials.txt
+Файл содержал Base64-строку:
 
 ![](https://github.com/Pwnboberry/writeups/blob/main/Attacktive_Directory/images/backuptxt.png)
 
-<details>
-<summary>Каково содержимое файла?</summary>
-
-YmFja3VwQHNwb29reXNlYy5sb2NhbDpiYWNrdXAyNTE3ODYw
-
-</details>
-
-Расшифровываем файл через ```bash echo ‘хэш’ | base64 -d ```
+Для декодирования использовалась команда:
+```
+echo 'YmFja3VwQHNwb29reXNlYy5sb2NhbDpiYWNrdXAyNTE3ODYw' | base64 -d
+```
 
 ![](https://github.com/Pwnboberry/writeups/blob/main/Attacktive_Directory/images/base64.png)
 
@@ -218,7 +165,9 @@ DRSUAPI
 
 </details>
 
-Получаем хэши всех пользователей через утилиту secretsdump
+Используя учётную запись backup, удалось выполнить дамп NTDS.DIT через DRSUAPI 
+
+с помощью инструмента secretsdump из пакета Impacket.
 Команда: 
 
 ```bash
@@ -234,29 +183,12 @@ Python3 secretsdump.py имя домена/backup@айпи
 
 </details>
 
-<details>
-<summary>Какой метод атаки позволяет нам аутентифицироваться как пользователь без пароля?</summary>
-
-Pass The Hash
-
-</details>
-
-<details>
-<summary>При использовании инструмента Evil-WinRM, какая опция (параметр) позволяет нам использовать хэш?</summary>
-
--H
-
-</details>
-
-Заходим в учетную запись администратора через 
-
-```bash
-Evil-winrm –u Administrator –H хэш –i айпи
-```
+Для получения shell-доступа к контроллеру домена использовалась техника Pass-the-Hash через Evil-WinRM.
 
 ![](https://github.com/Pwnboberry/writeups/blob/main/Attacktive_Directory/images/enter.png)
 
 ### Задача 8: Панель отправки флагов Flag
+После успешной аутентификации был получен доступ от имени Administrator, что подтвердило полную компрометацию Active Directory.
 
 Флаг Administrator
 
