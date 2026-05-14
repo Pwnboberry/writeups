@@ -84,7 +84,7 @@ Because no pre‑authentication was required, we performed an AS-REP Roasting at
 We used Impacket GetNPUsers to retrieve the hash and saved it as hash.txt.
 
 ```bash
-python3 GetNPUsers.py <domain>/<username> –no-pass –dc-ip айпи 
+python3 GetNPUsers.py <domain>/<username> –no-pass –dc-ip <IP> 
 ```
 
 ![](https://github.com/Pwnboberry/writeups/blob/main/Attacktive_Directory/images/admhash.png)
