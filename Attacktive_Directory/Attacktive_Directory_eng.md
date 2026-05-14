@@ -63,7 +63,7 @@ The following information was identified:
 
 For this task, we used Kerbrute, a tool that identifies valid user accounts without requiring authentication.
 ```bash
-kerbrute usernum –d <domain> –dc <IP> userlist.txt 
+kerbrute usernum -d <domain> -dc <IP> userlist.txt 
 ```
 
 ![](https://github.com/Pwnboberry/writeups/blob/main/Attacktive_Directory/images/kerbrute.png)
@@ -106,7 +106,7 @@ Kerberos 5 AS-REP etype 23
 The obtained hash was saved and passed to Hashcat:
 
 ```bash
-hashcat –m 18200 –a 0 <file_name> /usr/share/wordlists/rockyou.txt
+hashcat –m 18200 -a 0 <file_name> /usr/share/wordlists/rockyou.txt
 ```
 
 ![](https://github.com/Pwnboberry/writeups/blob/main/Attacktive_Directory/images/passwadm.png)
@@ -121,7 +121,7 @@ We successfully recovered the password for the svc-admin account.
 
 After obtaining domain credentials, we performed SMB share enumeration.
 ```bash
-smbclient –L <IP> –U <domain>/<username>
+smbclient -L <IP> -U <domain>/<username>
 ```
 ![](https://github.com/Pwnboberry/writeups/blob/main/Attacktive_Directory/images/smb1.png)
 
@@ -201,7 +201,7 @@ During the test, the Active Directory infrastructure was successfully compromise
 1. **For Kerberos:** Disable the DONT_REQUIRE_PREAUTH flag for all user accounts (except service accounts) to prevent AS-REP Roasting attacks.
 2. **For SMB:**  Do not store sensitive data (passwords, keys) in public SMB shares. Restrict share access according to the principle of least privilege.
 3. **For Pass-the-Hash:**  Implement multi‑factor authentication and limit the use of NTLM authentication in the domain. Monitor for suspicious WinRM connections.
-4. **For Политика паролей:** Enforce strong password complexity (length, special characters) and regular password changes.
+4. **For Password Policy:** Enforce strong password complexity (length, special characters) and regular password changes.
 
 ---
 
