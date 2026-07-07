@@ -1,7 +1,7 @@
 #pwnboberry
 
 🔐 Junior Penetration Tester  
-🎓 СПО Информационная безопасность (июнь 2026)   
+🎓 СПО Информационная безопасность   
 📝 Write-ups (https://github.com/pwnboberry/writeups)
 
 Связаться
